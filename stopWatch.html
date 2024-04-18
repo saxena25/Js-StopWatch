@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS StopWatch</title>
+    <style>
+        .container{
+            text-align: center;
+            border: 1px solid lightgray;
+            display: flex;
+            flex-direction: column;
+            width: 20rem;
+            margin: auto;
+            height: 5rem;
+            align-items: center;
+            justify-content: center;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            border-radius: 15px;
+            background-color: whitesmoke;
+        }
+        body{
+            background-color: beige;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="timer">
+            0h:00m:00s
+        </div>
+        <div class="buttons">
+            <button onclick="handleStart()">Start</button>
+            <button onclick="handleStop()">Stop</button>
+            <button onclick="handleReset()">Reset</button>
+        </div>
+    </div>
+</body>
+<script>
+    let DisplayTimer = document.querySelector('.timer');
+
+    let timer ;
+    let hours = 0;
+    let minutes = 0;
+    let seconds = 0;
+
+    function handleStart(){
+        timer = setInterval(()=>{
+            seconds++;
+
+            if(seconds >= 60){
+                seconds = 0;
+                minutes++;
+            }
+            if(minutes >= 60){
+                minutes = 0;
+                hours++;
+            }
+            DisplayTimer.innerText = `${hours}h:${minutes}m:${seconds}s`
+        },1000)
+    }
+
+    function handleStop(){
+        clearInterval(timer)
+    }
+
+    function handleReset(){
+        clearInterval(timer);
+        DisplayTimer.innerText = 'JS StopWatch'
+        hours = 0;
+        minutes = 0;
+        seconds = 0;
+    }
+</script>
+</html>
